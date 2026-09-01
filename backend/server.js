@@ -3,6 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const connectDB = require("./config/db");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
@@ -16,6 +17,8 @@ app.get("/", (req, res) => {
         message: "FitTrack Backend is Working"
     });
 });
+
+app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
