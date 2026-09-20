@@ -2,6 +2,11 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+
+// ===============================
+// REGISTER USER
+// ===============================
+
 const registerUser = async (req, res) => {
     try {
         const { name, email, password, age, gender, height, weight } = req.body;
@@ -50,6 +55,10 @@ const registerUser = async (req, res) => {
 };
 
 
+// ===============================
+// LOGIN USER
+// ===============================
+
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -95,7 +104,32 @@ const loginUser = async (req, res) => {
 };
 
 
+// ===============================
+// GET USER PROFILE
+// ===============================
+
+const getProfile = async (req, res) => {
+    try {
+        res.json({
+            message: "Profile fetched successfully",
+            user: req.user
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error",
+            error: error.message
+        });
+    }
+};
+
+
+// ===============================
+// EXPORT
+// ===============================
+
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    getProfile
 };
