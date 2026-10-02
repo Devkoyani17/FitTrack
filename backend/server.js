@@ -3,35 +3,130 @@ const cors = require("cors");
 require("dotenv").config();
 
 const connectDB = require("./config/db");
+
+const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const workoutRoutes = require("./routes/workoutRoutes");
+
+const {
+    notFound,
+    errorHandler
+} = require("./middleware/errorMiddleware");
+
 
 const app = express();
 
 
-// Connect MongoDB
+// ========================================
+// DATABASE
+// ========================================
+
 connectDB();
 
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// ========================================
+// MIDDLEWARE
+// ========================================
+
+app.use(
+    cors({
+        origin: "*"
+    })
+);
+
+app.use(
+    express.json({
+        limit: "10mb"
+    })
+);
+
+app.use(
+    express.urlencoded({
+        extended: true,
+        limit: "10mb"
+    })
+);
 
 
-// Test route
+// ========================================
+// HOME
+// ========================================
+
 app.get("/", (req, res) => {
+
     res.json({
-        message: "FitTrack Backend is Working"
+
+        message:
+            "FitTrack Backend is Working",
+
+        tagline:
+            "Track. Train. Transform. Shop.",
+
+        version:
+            "1.0.0"
     });
 });
 
 
-// User routes
-app.use("/api/users", userRoutes);
+// ========================================
+// HEALTH CHECK
+// ========================================
+
+app.get("/api/health", (req, res) => {
+
+    res.json({
+
+        success: true,
+
+        message:
+            "FitTrack API is healthy",
+
+        timestamp:
+            new Date().toISOString()
+    });
+});
 
 
-// Start server
-const PORT = process.env.PORT || 5000;
+// ========================================
+// API ROUTES
+// ========================================
+
+app.use(
+    "/api/auth",
+    authRoutes
+);
+
+app.use(
+    "/api/users",
+    userRoutes
+);
+
+app.use(
+    "/api/workouts",
+    workoutRoutes
+);
+
+
+// ========================================
+// ERROR HANDLING
+// ========================================
+
+app.use(notFound);
+
+app.use(errorHandler);
+
+
+// ========================================
+// SERVER
+// ========================================
+
+const PORT =
+    process.env.PORT || 5000;
+
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+
+    console.log(
+        `FitTrack Server running on port ${PORT}`
+    );
 });
