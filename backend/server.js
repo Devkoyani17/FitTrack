@@ -12,6 +12,8 @@ const waterRoutes = require("./routes/waterRoutes");
 const weightRoutes = require("./routes/weightRoutes");
 const goalRoutes = require("./routes/goalRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const productRoutes = require("./routes/productRoutes");
+
 
 const {
     notFound,
@@ -134,6 +136,11 @@ app.use(
 app.use(
     "/api/dashboard",
     dashboardRoutes
+);
+
+app.use(
+    "/api/products",
+    productRoutes
 );
 // ========================================
 // ERROR HANDLING
