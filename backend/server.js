@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const workoutRoutes = require("./routes/workoutRoutes");
 const mealRoutes = require("./routes/mealRoutes");
+const waterRoutes = require("./routes/waterRoutes");
 
 const {
     notFound,
@@ -110,6 +111,11 @@ app.use(
 app.use(
     "/api/meals",
     mealRoutes
+);
+
+app.use(
+    "/api/water",
+    waterRoutes
 );
 
 
