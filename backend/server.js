@@ -7,6 +7,7 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const workoutRoutes = require("./routes/workoutRoutes");
+const mealRoutes = require("./routes/mealRoutes");
 
 const {
     notFound,
@@ -104,6 +105,11 @@ app.use(
 app.use(
     "/api/workouts",
     workoutRoutes
+);
+
+app.use(
+    "/api/meals",
+    mealRoutes
 );
 
 
