@@ -13,7 +13,7 @@ const weightRoutes = require("./routes/weightRoutes");
 const goalRoutes = require("./routes/goalRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const productRoutes = require("./routes/productRoutes");
-
+const cartRoutes = require("./routes/cartRoutes");
 
 const {
     notFound,
@@ -142,6 +142,12 @@ app.use(
     "/api/products",
     productRoutes
 );
+
+app.use(
+    "/api/cart",
+    cartRoutes
+);
+
 // ========================================
 // ERROR HANDLING
 // ========================================
