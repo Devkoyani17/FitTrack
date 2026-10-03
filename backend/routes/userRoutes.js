@@ -1,10 +1,17 @@
 const express = require("express");
 
 const {
-    registerUser,
-    loginUser,
-    getMe
-} = require("../controllers/authController");
+    getProducts,
+    getProductById,
+    createProduct,
+    updateProduct,
+    deleteProduct
+} = require("../controllers/productController");
+
+const {
+    addProductReview,
+    getProductReviews
+} = require("../controllers/reviewController");
 
 const {
     protect
@@ -14,36 +21,76 @@ const router = express.Router();
 
 
 // ========================================
-// REGISTER
-// POST /api/auth/register
-// ========================================
-
-router.post(
-    "/register",
-    registerUser
-);
-
-
-// ========================================
-// LOGIN
-// POST /api/auth/login
-// ========================================
-
-router.post(
-    "/login",
-    loginUser
-);
-
-
-// ========================================
-// CURRENT USER
-// GET /api/auth/me
+// PRODUCTS
 // ========================================
 
 router.get(
-    "/me",
+    "/",
+    getProducts
+);
+
+
+// ========================================
+// SINGLE PRODUCT
+// ========================================
+
+router.get(
+    "/:id",
+    getProductById
+);
+
+
+// ========================================
+// CREATE PRODUCT
+// ========================================
+
+router.post(
+    "/",
     protect,
-    getMe
+    createProduct
+);
+
+
+// ========================================
+// UPDATE PRODUCT
+// ========================================
+
+router.put(
+    "/:id",
+    protect,
+    updateProduct
+);
+
+
+// ========================================
+// DELETE PRODUCT
+// ========================================
+
+router.delete(
+    "/:id",
+    protect,
+    deleteProduct
+);
+
+
+// ========================================
+// GET PRODUCT REVIEWS
+// ========================================
+
+router.get(
+    "/:id/reviews",
+    getProductReviews
+);
+
+
+// ========================================
+// ADD PRODUCT REVIEW
+// ========================================
+
+router.post(
+    "/:id/reviews",
+    protect,
+    addProductReview
 );
 
 

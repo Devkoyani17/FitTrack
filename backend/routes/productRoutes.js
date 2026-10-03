@@ -9,14 +9,20 @@ const {
 } = require("../controllers/productController");
 
 const {
-    protect
+    addProductReview,
+    getProductReviews
+} = require("../controllers/reviewController");
+
+const {
+    protect,
+    admin
 } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
 
 // ========================================
-// PRODUCTS
+// PUBLIC PRODUCTS
 // ========================================
 
 router.get(
@@ -26,7 +32,7 @@ router.get(
 
 
 // ========================================
-// SINGLE PRODUCT
+// GET SINGLE PRODUCT
 // ========================================
 
 router.get(
@@ -36,35 +42,59 @@ router.get(
 
 
 // ========================================
-// CREATE
+// ADMIN - CREATE PRODUCT
 // ========================================
 
 router.post(
     "/",
     protect,
+    admin,
     createProduct
 );
 
 
 // ========================================
-// UPDATE
+// ADMIN - UPDATE PRODUCT
 // ========================================
 
 router.put(
     "/:id",
     protect,
+    admin,
     updateProduct
 );
 
 
 // ========================================
-// DELETE
+// ADMIN - DELETE PRODUCT
 // ========================================
 
 router.delete(
     "/:id",
     protect,
+    admin,
     deleteProduct
+);
+
+
+// ========================================
+// GET PRODUCT REVIEWS
+// ========================================
+
+router.get(
+    "/:id/reviews",
+    getProductReviews
+);
+
+
+// ========================================
+// ADD PRODUCT REVIEW
+// ========================================
+
+router.post(
+    "/:id/reviews",
+    protect,
+    addProductReview
 );
 
 
