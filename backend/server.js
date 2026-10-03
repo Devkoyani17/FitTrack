@@ -10,6 +10,7 @@ const workoutRoutes = require("./routes/workoutRoutes");
 const mealRoutes = require("./routes/mealRoutes");
 const waterRoutes = require("./routes/waterRoutes");
 const weightRoutes = require("./routes/weightRoutes");
+const goalRoutes = require("./routes/goalRoutes");
 
 const {
     notFound,
@@ -124,7 +125,10 @@ app.use(
     weightRoutes
 );
 
-
+app.use(
+    "/api/goals",
+    goalRoutes
+);
 // ========================================
 // ERROR HANDLING
 // ========================================
