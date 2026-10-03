@@ -15,6 +15,7 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes"); 
+const wishlistRoutes = require("./routes/wishlistRoutes");
 
 const {
     notFound,
@@ -152,6 +153,11 @@ app.use(
 app.use(
     "/api/orders",
     orderRoutes
+);
+
+app.use(
+    "/api/wishlist",
+    wishlistRoutes
 );
 // ========================================
 // ERROR HANDLING
